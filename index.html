@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+  <title>Nishi | Graphic & UI/UX Designer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0B0B0F;
+      font-family: 'Inter', sans-serif;
+      color: #F5F5F7;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    .cursor-glow {
+      position: fixed;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(127,90,240,0.2) 0%, rgba(0,217,255,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s ease-out;
+      filter: blur(40px);
+    }
+
+    @media (max-width: 768px) {
+      .cursor-glow { display: none; }
+    }
+
+    .blob {
+      position: fixed;
+      width: 60vw;
+      height: 60vw;
+      background: radial-gradient(circle, rgba(127,90,240,0.2), rgba(255,77,141,0.08));
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -2;
+      animation: floatBlob 20s infinite alternate;
+    }
+    .blob2 {
+      width: 50vw;
+      height: 50vw;
+      background: radial-gradient(circle, rgba(0,217,255,0.15), rgba(127,90,240,0.05));
+      bottom: 0;
+      right: 0;
+      animation: floatBlob2 25s infinite alternate;
+    }
+    @keyframes floatBlob {
+      0% { transform: translate(-10%, -10%); opacity: 0.4; }
+      100% { transform: translate(15%, 15%); opacity: 0.7; }
+    }
+    @keyframes floatBlob2 {
+      0% { transform: translate(10%, 10%); opacity: 0.3; }
+      100% { transform: translate(-15%, -20%); opacity: 0.8; }
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 60px 0; }
+    }
+
+    .glass-card, .testimonial-card, .skill-card, .contact-form, .about-card {
+      background: rgba(20, 20, 30, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      border: 1px solid rgba(127,90,240,0.25);
+      transition: all 0.3s ease;
+    }
+
+    .btn-neon {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      background: linear-gradient(135deg, #7F5AF0, #00D9FF);
+      color: #0B0B0F;
+      box-shadow: 0 0 12px rgba(0,217,255,0.4);
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #7F5AF0;
+      color: #F5F5F7;
+      box-shadow: none;
+      margin-left: 16px;
+    }
+    .btn-outline:hover {
+      background: rgba(127,90,240,0.2);
+      border-color: #00D9FF;
+    }
+    .btn-neon:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px #7F5AF0;
+    }
+    @media (max-width: 550px) {
+      .btn-neon { padding: 12px 24px; font-size: 0.9rem; }
+      .btn-outline { margin-left: 12px; }
+    }
+
+    h1, h2, h3, .hero-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+    }
+    h2 {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #FFF, #7F5AF0, #00D9FF);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+    @media (max-width: 768px) {
+      h2 { font-size: 2.2rem; }
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero-text { flex: 1.2; }
+    .hero-image { flex: 1; display: flex; justify-content: center; }
+    .hero-name {
+      font-size: 5rem;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .hero-highlight { color: #00D9FF; text-shadow: 0 0 10px #00D9FF80; }
+    .hero-sub {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin: 1.5rem 0 2rem;
+      max-width: 550px;
+    }
+    .hero-image img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 30px;
+      object-fit: cover;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.4), 0 0 0 3px rgba(127,90,240,0.4);
+      transition: transform 0.4s;
+      border: 2px solid rgba(0,217,255,0.3);
+    }
+    .hero-image img:hover { transform: scale(1.02); }
+    @media (max-width: 900px) {
+      .hero-content { flex-direction: column-reverse; text-align: center; }
+      .hero-name { font-size: 3.5rem; }
+      .hero-sub { margin: 1rem auto; }
+      .hero-text { text-align: center; }
+      .hero-image img { max-width: 280px; }
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .skill-card {
+      padding: 0.9rem 1.5rem;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      transition: 0.2s;
+      background: rgba(30, 30, 45, 0.6);
+    }
+    .skill-card i { font-size: 1.5rem; color: #7F5AF0; }
+    .skill-card:hover { transform: translateY(-3px); border-color: #00D9FF; }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .portfolio-item {
+      background: #111117;
+      border-radius: 24px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(127,90,240,0.2);
+      cursor: pointer;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-8px);
+      border-color: #7F5AF0;
+      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
+    }
+    .portfolio-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .portfolio-info { padding: 1.2rem; }
+    .portfolio-info h4 { font-size: 1.2rem; margin-bottom: 0.3rem; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.8rem;
+    }
+    .service-card {
+      background: #111117;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(127,90,240,0.2);
+      cursor: pointer;
+    }
+    .service-card:hover {
+      transform: translateY(-8px);
+      border-color: #00D9FF;
+      box-shadow: 0 20px 30px -12px rgba(0,217,255,0.2);
+    }
+    .service-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .service-content {
+      padding: 1.5rem;
+    }
+    .service-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+    .service-content p {
+      color: #aaa;
+      line-height: 1.5;
+    }
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      background: linear-gradient(135deg, #7F5AF0, #FF4D8D);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+    }
+
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+    }
+    .testimonial-card {
+      padding: 2rem 1.5rem;
+      border-radius: 28px;
+    }
+    .testimonial-img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #7F5AF0;
+      margin-bottom: 1rem;
+    }
+    .testimonial-text { font-style: italic; margin: 1rem 0; color: #ddd; }
+
+    .contact-form {
+      padding: 2.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .form-group { margin-bottom: 1.2rem; }
+    input, textarea {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(10,10,15,0.8);
+      border: 1px solid #2c2c3a;
+      border-radius: 24px;
+      color: #fff;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #7F5AF0;
+      box-shadow: 0 0 10px rgba(127,90,240,0.3);
+    }
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .social-links a {
+      color: #F5F5F7;
+      font-size: 1.8rem;
+      transition: 0.2s;
+    }
+    .social-links a:hover { color: #00D9FF; transform: translateY(-4px); }
+
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(127,90,240,0.2);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1a24; }
+    ::-webkit-scrollbar-thumb { background: #7F5AF0; border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+<div class="blob" style="top: -20%; left: -10%;"></div>
+<div class="blob blob2" style="bottom: -10%; right: -5%;"></div>
+
+<!-- HERO SECTION with YOUR profile picture -->
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <div class="hero-text reveal">
+      <h1 class="hero-name">Hi, I'm <span class="hero-highlight">Nishi</span></h1>
+      <p class="hero-sub">Graphic Designer & UI/UX Designer crafting beautiful digital experiences.</p>
+      <div>
+        <a href="#portfolio" class="btn-neon">View My Work</a>
+        <a href="#contact" class="btn-neon btn-outline">Hire Me</a>
+      </div>
+    </div>
+    <div class="hero-image reveal">
+      <!-- YOUR PROFILE PICTURE - UPDATED! -->
+      <img id="profileImage" src="https://i.postimg.cc/8F0HR8Mg/Whats-App-Image-2026-05-15-at-7-47-17-AM.jpg" alt="Nishi - Graphic & UI/UX Designer">
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT SECTION -->
+<section id="about">
+  <div class="container">
+    <div class="reveal">
+      <h2>About Me</h2>
+      <div class="about-card glass-card" style="padding: 2rem;">
+        <p style="font-size: 1.15rem; margin-bottom: 1rem;">I'm Nishi — a passionate Graphic & UI/UX Designer with 6+ years of experience helping brands tell stories through meaningful design. I blend creativity and functionality to craft human-centered digital products.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem;">
+          <span class="skill-card" style="background:rgba(127,90,240,0.15);"><i class="fas fa-paintbrush"></i> UI/UX Design</span>
+          <span class="skill-card" style="background:rgba(127,90,240,0.15);"><i class="fas fa-trademark"></i> Branding</span>
+          <span class="skill-card" style="background:rgba(127,90,240,0.15);"><i class="fas fa-draw-polygon"></i> Graphic Design</span>
+          <span class="skill-card" style="background:rgba(127,90,240,0.15);"><i class="fas fa-pen-fancy"></i> Wireframing</span>
+          <span class="skill-card" style="background:rgba(127,90,240,0.15);"><i class="fas fa-mobile-alt"></i> Prototyping</span>
+          <span class="skill-card" style="background:rgba(127,90,240,0.15);"><i class="fab fa-instagram"></i> Social Media Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS SECTION -->
+<section id="skills">
+  <div class="container">
+    <div class="reveal">
+      <h2>Core Expertise</h2>
+      <div class="skills-grid">
+        <div class="skill-card"><i class="fab fa-figma"></i> Figma</div>
+        <div class="skill-card"><i class="fab fa-adobe"></i> Photoshop</div>
+        <div class="skill-card"><i class="fab fa-adobe"></i> Illustrator</div>
+        <div class="skill-card"><i class="fas fa-palette"></i> Canva</div>
+        <div class="skill-card"><i class="fas fa-code"></i> Web Design</div>
+        <div class="skill-card"><i class="fas fa-chart-line"></i> UX Research</div>
+        <div class="skill-card"><i class="fas fa-layer-group"></i> Prototyping</div>
+        <div class="skill-card"><i class="fas fa-tag"></i> Branding</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO SECTION -->
+<section id="portfolio">
+  <div class="container">
+    <div class="reveal">
+      <h2>Selected Work</h2>
+      <div class="bento-grid">
+        <div class="portfolio-item"><img class="portfolio-img" src="https://images.pexels.com/photos/6794349/pexels-photo-6794349.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Mobile App UI"><div class="portfolio-info"><h4>Mobile App UI Design</h4><p>Fitness tracker with neon glassmorphism</p></div></div>
+        <div class="portfolio-item"><img class="portfolio-img" src="https://images.pexels.com/photos/577585/pexels-photo-577585.jpeg?auto=compress&cs=tinysrgb&w=600" alt="SaaS Dashboard"><div class="portfolio-info"><h4>SaaS Dashboard</h4><p>Analytics platform for startups</p></div></div>
+        <div class="portfolio-item"><img class="portfolio-img" src="https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Fashion Brand"><div class="portfolio-info"><h4>Fashion Brand Identity</h4><p>Luxury visual system + packaging</p></div></div>
+        <div class="portfolio-item"><img class="portfolio-img" src="https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Social Media"><div class="portfolio-info"><h4>Social Media Campaign</h4><p>Viral assets & motion graphics</p></div></div>
+        <div class="portfolio-item"><img class="portfolio-img" src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Landing Page"><div class="portfolio-info"><h4>Landing Page Design</h4><p>Conversion-focused fintech</p></div></div>
+        <div class="portfolio-item"><img class="portfolio-img" src="https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&w=600" alt="E-commerce"><div class="portfolio-info"><h4>E-commerce Website UI</h4><p>Modern minimalist storefront</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES SECTION WITH REAL FREE STOCK IMAGES -->
+<section id="services">
+  <div class="container">
+    <div class="reveal">
+      <h2>What I Offer</h2>
+      <div class="service-grid">
+        <div class="service-card">
+          <img class="service-img" src="https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800" alt="UI/UX Design">
+          <div class="service-content">
+            <i class="fas fa-mobile-alt service-icon"></i>
+            <h3>UI/UX Design</h3>
+            <p>User flows, wireframes & high-fidelity prototypes that delight users.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img class="service-img" src="https://images.pexels.com/photos/3851446/pexels-photo-3851446.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Graphic Design">
+          <div class="service-content">
+            <i class="fas fa-paintbrush service-icon"></i>
+            <h3>Graphic Design</h3>
+            <p>Print, editorial & visual storytelling that captures attention.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img class="service-img" src="https://images.pexels.com/photos/1036841/pexels-photo-1036841.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Brand Identity">
+          <div class="service-content">
+            <i class="fas fa-crown service-icon"></i>
+            <h3>Brand Identity</h3>
+            <p>Logos, color systems & brand guidelines that stand out.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img class="service-img" src="https://images.pexels.com/photos/326503/pexels-photo-326503.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Website Design">
+          <div class="service-content">
+            <i class="fas fa-laptop-code service-icon"></i>
+            <h3>Website Design</h3>
+            <p>Responsive, aesthetic web experiences that convert.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img class="service-img" src="https://images.pexels.com/photos/57690/pexels-photo-57690.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Mobile App Design">
+          <div class="service-content">
+            <i class="fas fa-rocket service-icon"></i>
+            <h3>Mobile App Design</h3>
+            <p>iOS/Android ready interfaces with smooth interactions.</p>
+          </div>
+        </div>
+        <div class="service-card">
+          <img class="service-img" src="https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Social Media Creatives">
+          <div class="service-content">
+            <i class="fas fa-hashtag service-icon"></i>
+            <h3>Social Media Creatives</h3>
+            <p>Viral content & carousel design that engages audience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div class="reveal">
+      <h2>Kind Words</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card"><img class="testimonial-img" src="https://randomuser.me/api/portraits/women/68.jpg" alt="client"><p class="testimonial-text">"Nishi designed our entire brand identity — her attention to detail and creativity is unmatched. The UX flow elevated our product massively."</p><h4>— Sarah Chen, Creative Director</h4></div>
+        <div class="testimonial-card"><img class="testimonial-img" src="https://randomuser.me/api/portraits/men/32.jpg" alt="client"><p class="testimonial-text">"Incredible UI/UX designer! The mobile app she crafted won design awards. Responsive, visionary, and a joy to work with."</p><h4>— James Okafor, Startup Founder</h4></div>
+        <div class="testimonial-card"><img class="testimonial-img" src="https://randomuser.me/api/portraits/women/44.jpg" alt="client"><p class="testimonial-text">"Best design collaboration ever. Nishi brings fresh trends and pixel-perfect execution. Highly recommend for any creative project."</p><h4>— Elena Rossi, Brand Strategist</h4></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact">
+  <div class="container">
+    <div class="reveal">
+      <h2>Let's Connect</h2>
+      <div class="contact-form glass-card">
+        <form id="contactForm">
+          <div class="form-group"><input type="text" placeholder="Your Name" required id="name"></div>
+          <div class="form-group"><input type="email" placeholder="Email Address" required id="email"></div>
+          <div class="form-group"><textarea rows="4" placeholder="Tell me about your project..." required id="message"></textarea></div>
+          <button type="submit" class="btn-neon" style="width:100%">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div class="social-links">
+          <a href="#" target="_blank"><i class="fab fa-behance"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-dribbble"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p style="text-align: center; margin-top: 1.2rem; font-size: 0.85rem;">nishi@creativestudio.com | +1 (555) 678-2341</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Nishi — Graphic & UI/UX Designer. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  const cursorGlow = document.getElementById('cursorGlow');
+  if (cursorGlow) {
+    document.addEventListener('mousemove', (e) => {
+      cursorGlow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+  }
+
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+  revealElements.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      if (targetId === "#" || targetId === "") return;
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      alert(name ? `✨ Thanks ${name}! Nishi will reach out within 24h. ✨` : '✨ Message sent! Nishi will respond soon. ✨');
+      contactForm.reset();
+    });
+  }
+
+  const cards = document.querySelectorAll('.portfolio-item, .service-card, .skill-card, .testimonial-card');
+  cards.forEach((el, idx) => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, idx * 40);
+  });
+</script>
+</body>
+</html>
